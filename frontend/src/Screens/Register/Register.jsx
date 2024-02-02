@@ -6,6 +6,7 @@ import { ContainedButton } from "../../components/reusable/button/Button";
 import { OutlinedButton } from "../../components/reusable/button/Button";
 import { toast } from "react-toastify";
 import { toastSuccess } from "../../components/toast/Toasts";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -95,7 +96,7 @@ const Register = () => {
   return (
     <div className="regform min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">
       <form className="innerForm flex flex-col gap-y-3 bg-white p-20 pb-[100px] relative border min-w-[500px] border-gray-300 rounded-2xl  m-1">
-        <div className="mb-3 flex flex-col gap-y-2   md:gap-x-2  md:flex-row  md:justify-between md:items-center ">
+        <div className="mb-3 flex flex-col gap-y-6   md:gap-x-2  md:flex-row  md:justify-between md:items-center ">
           <TextField
             id="firstName"
             label="First Name"
@@ -191,13 +192,19 @@ const Register = () => {
           />
         </div>
 
-        <div>
+        <div className="p-2 w-full md:w-[70%] m-auto flex items-start  md:justify-between md:items-center flex-col md:flex-row  ">
           <button
-            className="  hover:shadow-md hover:shadow-blue-950  transition-all duration-300  rounded bg-blue-800  px-5 py-2 mt-10 text-white font-semibold "
+            className=" tracking-wide	text-xl hover:shadow-md hover:shadow-blue-950  transition-all duration-300  rounded bg-blue-800  px-5 py-2  text-white font-semibold "
             onClick={handleRegiter}
             type="submit">
             SignUp
           </button>
+          <p className="text-[14px]">
+            Already have an account ?
+            <Link to="/login " className="text-blue-800">
+              Login here
+            </Link>
+          </p>
         </div>
       </form>
     </div>

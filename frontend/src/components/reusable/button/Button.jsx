@@ -1,11 +1,21 @@
-import React from "react";
+import * as React from "react";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
-const Button = (text) => {
+export const ContainedButton = ({ text }) => {
   return (
-    <button className="flex justify-center items-center bg-black px-5 py-2 text-bold text-2xl text-center">
-      {text}
-    </button>
+    <Stack spacing={2} direction="row">
+      <Button type="submit" variant="contained" className="bg-blue-800 mt-10">
+        {text}
+      </Button>
+    </Stack>
   );
 };
 
-export default Button;
+export const OutlinedButton = () => {
+  return (
+    <Stack spacing={2} direction="row">
+      <Button variant="outlined">Outlined</Button>
+    </Stack>
+  );
+};

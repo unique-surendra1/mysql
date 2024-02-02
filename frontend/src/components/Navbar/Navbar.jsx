@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 flex justify-between items-center w-full px-5 h-[70px] bg-blue-800 text-white ">
+    <nav className=" z-50 fixed top-0 flex justify-between items-center w-full px-5 h-[70px] bg-blue-800 text-white ">
       <div className="logo">
         <Link to="/">logo</Link>
       </div>

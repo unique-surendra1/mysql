@@ -1,5 +1,12 @@
-const registerUserSqlQuery = (userName, userEmail, userPhoneNumber) => {
-  return `INSERT INTO myuser ( userName, userEmail,userPhoneNumber) VALUES( '${userName}', '${userEmail}','${userPhoneNumber}');`;
+const registerUserSqlQuery = (
+  firstName,
+  middleName,
+  lastName,
+  userName,
+  userEmail,
+  userPhoneNumber
+) => {
+  return `INSERT INTO myuser ( firstName, middleName,lastName, userName, userEmail,userPhoneNumber) VALUES('${firstName}','${middleName}','${lastName}', '${userName}', '${userEmail}','${userPhoneNumber}');`;
 };
 
 const getAllusersSqlQuery = () => {

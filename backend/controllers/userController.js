@@ -9,11 +9,25 @@ const conn = dbConnection();
 // @ Type Public & POST
 const registerUser = async (req, resp) => {
   const data = req.body;
-  const { userName, userEmail, userPhoneNumber } = data;
+  const {
+    firstName,
+    middleName,
+    lastName,
+    userName,
+    userEmail,
+    userPhoneNumber,
+  } = data;
 
   try {
     conn.query(
-      queries.registerUserSqlQuery(userName, userEmail, userPhoneNumber),
+      queries.registerUserSqlQuery(
+        firstName,
+        middleName,
+        lastName,
+        userName,
+        userEmail,
+        userPhoneNumber
+      ),
       (error, res) => {
         if (error) {
           console.log(error, "Error...........");

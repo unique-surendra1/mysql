@@ -19,7 +19,7 @@ const Hero = () => {
 
   return (
     <div className=" min-h-screen mt-[70px] bg-slate-300 ">
-      <Users data={data ? data : null} />
+      <Users data={data} />
     </div>
   );
 };

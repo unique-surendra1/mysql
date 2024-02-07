@@ -10,12 +10,8 @@ import { toastSuccess } from "../../components/toast/Toasts";
 
 const Login = () => {
   const [user, setUser] = useState({
-    firstName: "",
-    middleName: "",
-    lastName: "",
     userName: "",
     userEmail: "",
-    userPhoneNumber: "",
   });
 
   const handleOnchange = (e) => {
@@ -30,19 +26,10 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (
-      user.firstName !== "" ||
-      user.userEmail !== "" ||
-      user.userName !== "" ||
-      user.userPhoneNumber !== ""
-    ) {
+    if (user.userEmail !== "" || user.userName !== "") {
       const data = {
-        firstName: user.firstName,
-        middleName: user.middleName,
-        lastName: user.lastName,
         userName: user.userName,
         userEmail: user.userEmail,
-        userPhoneNumber: user.userPhoneNumber,
       };
 
       // user sended data
@@ -50,26 +37,38 @@ const Login = () => {
 
       await axios
         .post(`${url}/loginuser`, data)
+
         .then((res) => {
-          toast.success("User Registered Successfully");
-          // console.log(res, "resonse....");
+          console.log(res, "resonse....");
+
+          // if (res.response.status === 404) {
+          //   toast.error(res.response.data.message);
+          // }
+
+          if (res.status === 200) {
+            toast.success(res.data.message);
+            if (res.data.status === 200) {
+              setUser({
+                userName: "",
+                userEmail: "",
+              });
+            }
+          }
         })
         .catch((err) => {
-          toast.error(err.response.data.sqlMessage);
+          // if (err.response.status === 400) {
+          //   toast.error(err.response.data.message);
+          // }
+          if (err.response.status === 404) {
+            toast.error(err.response.data.message);
+          }
+          // toast.error(err.response.data.sqlMessage);
           console.log(err, "Error....");
         });
 
       // clearing all input fields
-      setUser({
-        firstName: "",
-        middleName: "",
-        lastName: "",
-        userName: "",
-        userEmail: "",
-        userPhoneNumber: "",
-      });
     } else {
-      alert("Fill all fields");
+      toast.error("Fill all fields");
     }
   };
 
@@ -96,50 +95,6 @@ const Login = () => {
   return (
     <div className="regform min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">
       <form className="innerForm flex flex-col gap-y-3 bg-white p-20 pb-[100px] relative border min-w-[500px] border-gray-300 rounded-2xl  m-1">
-        <div className="mb-3 flex flex-col gap-y-6   md:gap-x-2  md:flex-row  md:justify-between md:items-center ">
-          <TextField
-            id="firstName"
-            label="First Name"
-            variant="outlined"
-            lang="english"
-            name="firstName"
-            value={user.firstName}
-            onChange={handleOnchange}
-            placeholder="Enter user name..."
-            required
-            type="text"
-            fullWidth
-            inputProps={inputStyle}
-            InputLabelProps={labelStyle}
-          />
-          <TextField
-            id="middleName"
-            label="Middle Name"
-            variant="outlined"
-            name="middleName"
-            value={user.middleName}
-            onChange={handleOnchange}
-            placeholder="Enter user name..."
-            type="text"
-            fullWidth
-            inputProps={inputStyle}
-            InputLabelProps={labelStyle}
-          />
-          <TextField
-            id="lastName"
-            label="Last Name"
-            variant="outlined"
-            lang="english"
-            name="lastName"
-            value={user.lastName}
-            onChange={handleOnchange}
-            placeholder="Enter user name..."
-            type="text"
-            fullWidth
-            inputProps={inputStyle}
-            InputLabelProps={labelStyle}
-          />
-        </div>
         <div className="mb-3">
           <TextField
             id="userName"
@@ -175,26 +130,10 @@ const Login = () => {
             InputLabelProps={labelStyle}
           />
         </div>
-        <div className="mb-3">
-          <TextField
-            id="userPhoneNumber"
-            label="PhoneNumber"
-            variant="outlined"
-            name="userPhoneNumber"
-            value={user.userPhoneNumber}
-            onChange={handleOnchange}
-            placeholder="Enter user name..."
-            required
-            type="number"
-            fullWidth
-            inputProps={inputStyle}
-            InputLabelProps={labelStyle}
-          />
-        </div>
 
-        <div className="p-2 w-full md:w-[70%] m-auto flex items-start  md:justify-between md:items-center flex-col md:flex-row  ">
+        <div className="p-2 w-full md:w-[100%] m-auto flex items-start  md:justify-between md:items-center flex-col md:flex-row  ">
           <button
-            className=" tracking-wide	text-xl hover:shadow-md hover:shadow-blue-950  transition-all duration-300  rounded bg-blue-800  px-5 py-2  text-white font-semibold "
+            className="mr-2 tracking-wide	text-xl hover:shadow-md hover:shadow-blue-950  transition-all duration-300  rounded bg-blue-800  px-5 py-2  text-white font-semibold "
             onClick={handleLogin}
             type="submit">
             Login

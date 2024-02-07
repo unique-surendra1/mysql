@@ -97,8 +97,47 @@ const getAllUser = (req, resp) => {
 // @ Desc logining  user
 // @ Route /api/loginuser
 // @ Type Public & POST
-const loginUser = (req, res) => {
-  res.send("user loged in");
+const loginUser = (req, resp) => {
+  const { userName, userEmail } = req.body;
+  try {
+    conn.query(queries.loginUser(userName, userEmail), (error, res) => {
+      if (error) {
+        const response = {
+          status: 422,
+          error: error,
+          message: error.sqlMessage,
+          data: res,
+        };
+        return resp.status(404).json(response);
+      } else {
+        // console.log(res, "ressssssssssssssssssssssssss");
+
+        if (res[0] == null) {
+          const response = {
+            status: 404,
+            message: "User not registered",
+            data: res,
+          };
+          return resp.status(404).json(response);
+        } else {
+          const response = {
+            status: 200,
+            message: "User logged in successfully",
+            data: res,
+          };
+
+          return resp.status(200).json(response);
+        }
+      }
+    });
+  } catch (error) {
+    const response = {
+      error: error,
+      message: "Something went wrong!",
+      data: null,
+    };
+    return resp.status(400).json(response);
+  }
 };
 
 // @ Desc updating  user

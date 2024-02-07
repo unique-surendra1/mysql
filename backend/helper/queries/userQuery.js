@@ -9,6 +9,10 @@ const registerUserSqlQuery = (
   return `INSERT INTO myuser ( firstName, middleName,lastName, userName, userEmail,userPhoneNumber) VALUES('${firstName}','${middleName}','${lastName}', '${userName}', '${userEmail}','${userPhoneNumber}');`;
 };
 
+const loginUser = (userName, userEmail) => {
+  return `SELECT userName, userEmail FROM myuser WHERE userName='${userName}' && userEmail='${userEmail}';`;
+};
+
 const getAllusersSqlQuery = () => {
   return `SELECT * FROM  myuser;`;
 };
@@ -31,6 +35,7 @@ const deleteUserSqlQuery = (id) => {
 
 export const queries = {
   registerUserSqlQuery,
+  loginUser,
   getuserSqlQuery,
   getAllusersSqlQuery,
   updateUserSqlQuery,

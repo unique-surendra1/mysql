@@ -17,6 +17,13 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<Hero />} />
       <Route path="/login" element={<Login />} />
       <Route path="/sign-up" element={<Register />} />
+
+      {/* private routes */}
+      <Route path="" element={<App />}>
+        <Route index={true} path="/" element={<Hero />} />
+        <Route path="/dashboard" element={<Login />} />
+        <Route path="/profile" element={<Register />} />
+      </Route>
     </Route>
   )
 );

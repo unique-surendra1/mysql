@@ -11,12 +11,12 @@ import dbConnection from "./config/MySQLdbconnection.js";
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// cors for enabling to make access from frontend
+// cors for enabling to make access for frontend
 app.use(cors());
 
 import router from "./routes/userRoutes.js";
 
-// // connecting database
+// connecting database
 // connectDB();
 // dbConnection();
 

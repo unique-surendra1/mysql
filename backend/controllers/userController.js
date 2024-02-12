@@ -99,6 +99,8 @@ const getAllUser = (req, resp) => {
 // @ Type Public & POST
 const loginUser = (req, resp) => {
   const { userName, userEmail } = req.body;
+  // `SELECT userEmail FROM myuser WHERE userEmail='${userEmail};'`,
+
   try {
     conn.query(queries.loginUser(userName, userEmail), (error, res) => {
       if (error) {
@@ -115,7 +117,7 @@ const loginUser = (req, resp) => {
         if (res[0] == null) {
           const response = {
             status: 404,
-            message: "User not registered",
+            message: "Invalid Credentials",
             data: res,
           };
           return resp.status(404).json(response);

@@ -2,14 +2,24 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
+// importing redux stuff
+import store from "./fetures/store.js";
+import { Provider } from "react-redux";
+
+// importing router stuff
 import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
   Route,
 } from "react-router-dom";
+
+// importing components stuff
 import Hero from "./components/Hero/Hero.jsx";
-import { Register, Login } from "./Screens/index.js";
+
+// importing Screens stuff
+import { Register, Login, Profile } from "./Screens/index.js";
+import PrivateRoute from "./components/Private/PrivateRoute.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,17 +29,17 @@ const router = createBrowserRouter(
       <Route path="/sign-up" element={<Register />} />
 
       {/* private routes */}
-      <Route path="" element={<App />}>
-        <Route index={true} path="/" element={<Hero />} />
-        <Route path="/dashboard" element={<Login />} />
-        <Route path="/profile" element={<Register />} />
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </Provider>
 );

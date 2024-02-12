@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+// import { useLoginMutation } from "../../fetures/auhtSlices/userApiSlice";
+import { setCredentials } from "../../fetures/auhtSlices/authSlice";
+
 import axios from "axios";
-import { ContainedButton } from "../../components/reusable/button/Button";
-import { OutlinedButton } from "../../components/reusable/button/Button";
 import { toast } from "react-toastify";
-import { toastSuccess } from "../../components/toast/Toasts";
+import { toastSuccess, toastError } from "../../components/toast/Toasts";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
     userName: "",
     userEmail: "",
@@ -56,6 +61,11 @@ const Login = () => {
           }
         })
         .catch((err) => {
+          if (err.code === "ERR_NETWORK") {
+            toast.error("Please check your network connection!", toastError);
+          }
+
+          console.log(err, "Error....");
           // if (err.response.status === 400) {
           //   toast.error(err.response.data.message);
           // }
@@ -63,12 +73,11 @@ const Login = () => {
             toast.error(err.response.data.message);
           }
           // toast.error(err.response.data.sqlMessage);
-          console.log(err, "Error....");
         });
 
       // clearing all input fields
     } else {
-      toast.error("Fill all fields");
+      toast.error("Fill all the fields", toastError);
     }
   };
 
@@ -93,8 +102,8 @@ const Login = () => {
     },
   };
   return (
-    <div className="regform min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">
-      <form className="innerForm flex flex-col gap-y-3 bg-white p-20 pb-[100px] relative border min-w-[500px] border-gray-300 rounded-2xl  m-1">
+    <div className="login  min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">
+      <form className="innerForm  shadow-2xl shadow-sky-950 flex flex-col gap-y-3 bg-white p-20 pb-[100px] relative border min-w-[500px] border-gray-300 rounded-2xl  m-1">
         <div className="mb-3">
           <TextField
             id="userName"
@@ -142,7 +151,7 @@ const Login = () => {
             Do'nt have an account ?{" "}
             <Link to="/sign-up " className="text-blue-800">
               Sign-Up Now
-            </Link>{" "}
+            </Link>
           </p>
         </div>
       </form>

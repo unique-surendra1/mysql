@@ -8,12 +8,8 @@ const Users = ({ data }) => {
 
   return (
     <section>
-      {userdata.map((item) => {
-        return (
-          <div key={item.id}>
-            <h1>{item.firstName}</h1>
-          </div>
-        );
+      {data.map((item) => {
+        return <User key={item.id} data={data} />;
       })}
     </section>
   );

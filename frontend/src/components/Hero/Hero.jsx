@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Users from "./Users/Users";
-import GenerateInvoice from "../DownLoad/GenerateInvoice";
+// import GenerateInvoice from "../DownLoad/GenerateInvoice";
 
 const Hero = () => {
   const [data, setData] = useState([]);
@@ -19,8 +19,8 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className=" h-[100%] mt-[70px] bg-slate-300 ">
-      <GenerateInvoice />
+    <div className=" h-[100%] mt-[70px] bg-slate-100 ">
+      {/* <GenerateInvoice /> */}
       <Users data={data ? data : null} />
     </div>
   );

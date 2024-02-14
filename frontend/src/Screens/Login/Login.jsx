@@ -103,7 +103,7 @@ const Login = () => {
   };
   return (
     <div className="login  min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">
-      <form className="innerForm  shadow-2xl shadow-sky-950 flex flex-col gap-y-3 bg-white p-20 pb-[100px] relative border min-w-[500px] border-gray-300 rounded-2xl  m-1">
+      <form className="innerForm   flex flex-col gap-y-3 bg-white p-20 pb-[100px] relative border min-w-[500px] border-gray-300 rounded-2xl  m-1">
         <div className="mb-3">
           <TextField
             id="userName"
@@ -113,9 +113,9 @@ const Login = () => {
             name="userName"
             value={user.userName}
             onChange={handleOnchange}
-            placeholder="Enter user email..."
+            placeholder="Enter user Name..."
             required
-            type="email"
+            type="text"
             fullWidth
             inputProps={inputStyle}
             InputLabelProps={labelStyle}
@@ -148,7 +148,7 @@ const Login = () => {
             Login
           </button>
           <p className="text-[14px]">
-            Do'nt have an account ?{" "}
+            Do'nt have an account ?
             <Link to="/sign-up " className="text-blue-800">
               Sign-Up Now
             </Link>

@@ -1,7 +1,9 @@
 import User from "../models/userSchema.js";
 import { queries } from "../helper/queries/userQuery.js";
-
 import dbConnection from "../config/MySQLdbconnection.js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 const conn = dbConnection();
 // @ Desc registering new user
@@ -9,23 +11,26 @@ const conn = dbConnection();
 // @ Type Public & POST
 const registerUser = async (req, resp) => {
   const data = req.body;
+
   const {
     firstName,
     middleName,
     lastName,
     userName,
     userEmail,
+    password,
     userPhoneNumber,
   } = data;
 
   try {
     conn.query(
-      queries.registerUserSqlQuery(
+      await queries.registerUserSqlQuery(
         firstName,
         middleName,
         lastName,
         userName,
         userEmail,
+        password,
         userPhoneNumber
       ),
       (error, res) => {
@@ -34,6 +39,20 @@ const registerUser = async (req, resp) => {
           resp.status(400).json(error);
         } else {
           // console.log(res);
+
+          // let jwtSecretKey = process.env.SECRET_KEY;
+
+          // const Data = {
+          //   name: "surendra",
+          // };
+
+          // const token = jwt.sign(Data, jwtSecretKey);
+
+          // const sendData = {
+          //   token: token,
+          //   data: res,
+          // };
+          // resp.send(token);
           return resp.status(200).json(res);
         }
       }

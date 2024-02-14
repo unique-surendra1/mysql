@@ -1,12 +1,18 @@
-const registerUserSqlQuery = (
+import bcryptjs from "bcryptjs";
+
+const registerUserSqlQuery = async (
   firstName,
   middleName,
   lastName,
   userName,
   userEmail,
+  password,
   userPhoneNumber
 ) => {
-  return `INSERT INTO myuser ( firstName, middleName,lastName, userName, userEmail,userPhoneNumber) VALUES('${firstName}','${middleName}','${lastName}', '${userName}', '${userEmail}','${userPhoneNumber}');`;
+  const salt = await bcryptjs.genSaltSync(10);
+  const hashPassword = await bcryptjs.hashSync(password, salt);
+
+  return `INSERT INTO myuser (firstName, middleName, lastName, userName, userEmail, password, userPhoneNumber) VALUES('${firstName}','${middleName}','${lastName}', '${userName}', '${userEmail}', '${hashPassword}','${userPhoneNumber}');`;
 };
 
 const loginUser = (userName, userEmail) => {

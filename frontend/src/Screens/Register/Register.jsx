@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Register.css";
 import { TextField } from "@mui/material";
 import axios from "axios";
@@ -9,6 +9,10 @@ import { toastSuccess } from "../../components/toast/Toasts";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  useEffect(() => {
+    window.scrollTo({ top: "0", behavior: "smooth" });
+  }, []);
+
   const [user, setUser] = useState({
     firstName: "",
     middleName: "",

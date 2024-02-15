@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,6 +11,10 @@ import { toast } from "react-toastify";
 import { toastSuccess, toastError } from "../../components/toast/Toasts";
 
 const Login = () => {
+  useEffect(() => {
+    window.scrollTo({ top: "0", behavior: "smooth" });
+  }, []);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

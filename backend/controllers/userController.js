@@ -2,14 +2,17 @@ import User from "../models/userSchema.js";
 import { queries } from "../helper/queries/userQuery.js";
 import dbConnection from "../config/MySQLdbconnection.js";
 import jwt from "jsonwebtoken";
+import bcryptjs from "bcryptjs";
 import dotenv from "dotenv";
+import generateTken from "../utils/generateJwtToken.js";
+import matchPassWord from "../utils/matchPassword.js";
 dotenv.config();
 
 const conn = dbConnection();
 // @ Desc registering new user
 // @ Route /api/registeruser
 // @ Type Public & POST
-const registerUser = async (req, resp) => {
+const registerUser = async (req, res) => {
   const data = req.body;
 
   const {
@@ -23,6 +26,9 @@ const registerUser = async (req, resp) => {
   } = data;
 
   try {
+    const salt = await bcryptjs.genSaltSync(10);
+    const hashPassword = await bcryptjs.hashSync(password, salt);
+
     conn.query(
       await queries.registerUserSqlQuery(
         firstName,
@@ -30,30 +36,16 @@ const registerUser = async (req, resp) => {
         lastName,
         userName,
         userEmail,
-        password,
+        hashPassword,
         userPhoneNumber
       ),
-      (error, res) => {
+      (error, resp) => {
         if (error) {
           console.log(error, "Error...........");
-          resp.status(400).json(error);
+          res.status(400).json(error.sqlMessage);
         } else {
-          // console.log(res);
-
-          // let jwtSecretKey = process.env.SECRET_KEY;
-
-          // const Data = {
-          //   name: "surendra",
-          // };
-
-          // const token = jwt.sign(Data, jwtSecretKey);
-
-          // const sendData = {
-          //   token: token,
-          //   data: res,
-          // };
-          // resp.send(token);
-          return resp.status(200).json(res);
+          generateTken(res, userEmail);
+          res.status(200).json(resp);
         }
       }
     );
@@ -65,7 +57,7 @@ const registerUser = async (req, resp) => {
 // @ Desc registering new user
 // @ Route /api/getuser/:id
 // @ Type Public & GET
-const getrUser = (req, resp) => {
+const getUser = (req, resp) => {
   const id = req.params.id;
 
   try {
@@ -79,6 +71,8 @@ const getrUser = (req, resp) => {
       }
     });
   } catch (error) {
+    resp.status(400).json(error);
+
     console.log(error);
   }
 };
@@ -116,49 +110,52 @@ const getAllUser = (req, resp) => {
 // @ Desc logining  user
 // @ Route /api/loginuser
 // @ Type Public & POST
-const loginUser = (req, resp) => {
-  const { userName, userEmail } = req.body;
-  // `SELECT userEmail FROM myuser WHERE userEmail='${userEmail};'`,
+const loginUser = async (req, res) => {
+  const { password, userEmail } = req.body;
+
+  var savedPassword;
+  let passsss;
 
   try {
-    conn.query(queries.loginUser(userName, userEmail), (error, res) => {
+    conn.query(queries.fecthPassword(userEmail), async (error, resp) => {
       if (error) {
-        const response = {
-          status: 422,
-          error: error,
-          message: error.sqlMessage,
-          data: res,
-        };
-        return resp.status(404).json(response);
-      } else {
-        // console.log(res, "ressssssssssssssssssssssssss");
+        res.status(404).json("Server side db error");
+      }
+      if (resp) {
+        if (resp.length > 0) {
+          passsss = resp;
+          savedPassword = passsss[0].password;
+          const staTus = await matchPassWord(password, savedPassword);
 
-        if (res[0] == null) {
-          const response = {
-            status: 404,
-            message: "Invalid Credentials",
-            data: res,
-          };
-          return resp.status(404).json(response);
+          if (staTus) {
+            generateTken(res, userEmail);
+            res
+              .status(200)
+              .json({ message: "User login successfully", status: 200 });
+          } else {
+            res.status(404).json({ message: "Invalid password " });
+          }
         } else {
-          const response = {
-            status: 200,
-            message: "User logged in successfully",
-            data: res,
-          };
-
-          return resp.status(200).json(response);
+          res.status(404).json({ message: "Invalid credentils " });
         }
       }
     });
   } catch (error) {
-    const response = {
+    const data = {
       error: error,
-      message: "Something went wrong!",
+      message: " Syntex error ",
       data: null,
     };
-    return resp.status(400).json(response);
+    res.status(404).json(data);
   }
+};
+
+// @ Desc logout  user
+// @ Route /api/logoutuser
+// @ Type Public & POST
+const logoutUser = async (req, res) => {
+  res.cookie("jwt", "", { expires: new Date(0), httpOnly: true });
+  res.status(200).json({ message: "User loged out" });
 };
 
 // @ Desc updating  user
@@ -230,9 +227,10 @@ const deleteAllUser = async (req, resp) => {
 
 export {
   registerUser,
-  getrUser,
+  getUser,
   getAllUser,
   loginUser,
+  logoutUser,
   updateUser,
   deleteUser,
   deleteAllUser,

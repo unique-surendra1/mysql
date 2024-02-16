@@ -11,7 +11,13 @@ import { toast } from "react-toastify";
 import { toastSuccess, toastError } from "../../components/toast/Toasts";
 
 const Login = () => {
+  const { userInfo } = useSelector((state) => state.auth);
+
   useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+
     window.scrollTo({ top: "0", behavior: "smooth" });
   }, []);
 
@@ -19,7 +25,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
-    userName: "",
+    password: "",
     userEmail: "",
   });
 
@@ -35,9 +41,9 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (user.userEmail !== "" || user.userName !== "") {
+    if (user.userEmail !== "" || user.password !== "") {
       const data = {
-        userName: user.userName,
+        password: user.password,
         userEmail: user.userEmail,
       };
 
@@ -57,8 +63,9 @@ const Login = () => {
           if (res.status === 200) {
             toast.success(res.data.message);
             if (res.data.status === 200) {
+              dispatch(setCredentials(user));
               setUser({
-                userName: "",
+                password: "",
                 userEmail: "",
               });
             }
@@ -110,24 +117,6 @@ const Login = () => {
       <form className="innerForm   flex flex-col gap-y-3 bg-white p-20 pb-[100px] relative border min-w-[500px] border-gray-300 rounded-2xl  m-1">
         <div className="mb-3">
           <TextField
-            id="userName"
-            label="User Name"
-            variant="outlined"
-            lang="english"
-            name="userName"
-            value={user.userName}
-            onChange={handleOnchange}
-            placeholder="Enter user Name..."
-            required
-            type="text"
-            fullWidth
-            inputProps={inputStyle}
-            InputLabelProps={labelStyle}
-          />
-        </div>
-
-        <div className="mb-3">
-          <TextField
             id="userEmail"
             label="User email"
             variant="outlined"
@@ -138,6 +127,24 @@ const Login = () => {
             placeholder="Enter user email..."
             required
             type="email"
+            fullWidth
+            inputProps={inputStyle}
+            InputLabelProps={labelStyle}
+          />
+        </div>
+
+        <div className="mb-3">
+          <TextField
+            id="password"
+            label="User password"
+            variant="outlined"
+            lang="english"
+            name="password"
+            value={user.password}
+            onChange={handleOnchange}
+            placeholder="Enter user password..."
+            required
+            type="password"
             fullWidth
             inputProps={inputStyle}
             InputLabelProps={labelStyle}

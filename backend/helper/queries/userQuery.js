@@ -6,17 +6,22 @@ const registerUserSqlQuery = async (
   lastName,
   userName,
   userEmail,
-  password,
+  hashPassword,
   userPhoneNumber
 ) => {
-  const salt = await bcryptjs.genSaltSync(10);
-  const hashPassword = await bcryptjs.hashSync(password, salt);
+  // const salt = await bcryptjs.genSaltSync(10);
+  // const hashPassword = await bcryptjs.hashSync(password, salt);
 
   return `INSERT INTO myuser (firstName, middleName, lastName, userName, userEmail, password, userPhoneNumber) VALUES('${firstName}','${middleName}','${lastName}', '${userName}', '${userEmail}', '${hashPassword}','${userPhoneNumber}');`;
 };
 
-const loginUser = (userName, userEmail) => {
-  return `SELECT userName, userEmail FROM myuser WHERE userName='${userName}' && userEmail='${userEmail}';`;
+const fecthPassword = (userEmail) => {
+  return `SELECT password FROM  myuser
+WHERE userEmail='${userEmail}';`;
+};
+
+const loginUser = (pasword, userEmail) => {
+  return `SELECT pasword, userEmail FROM myuser WHERE userName='${pasword}' && userEmail='${userEmail}';`;
 };
 
 const getAllusersSqlQuery = () => {
@@ -42,6 +47,7 @@ const deleteUserSqlQuery = (id) => {
 export const queries = {
   registerUserSqlQuery,
   loginUser,
+  fecthPassword,
   getuserSqlQuery,
   getAllusersSqlQuery,
   updateUserSqlQuery,

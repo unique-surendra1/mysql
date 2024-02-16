@@ -65,20 +65,21 @@ const Register = () => {
           })
           .catch((err) => {
             toast.error(err.response.data.sqlMessage);
+            toast.error(err.response.data);
             console.log(err, "Error....");
           });
 
-        // clearing all input fields
-        setUser({
-          firstName: "",
-          middleName: "",
-          lastName: "",
-          userName: "",
-          userEmail: "",
-          password: "",
-          confirmPassword: "",
-          userPhoneNumber: "",
-        });
+        // // clearing all input fields
+        // setUser({
+        //   firstName: "",
+        //   middleName: "",
+        //   lastName: "",
+        //   userName: "",
+        //   userEmail: "",
+        //   password: "",
+        //   confirmPassword: "",
+        //   userPhoneNumber: "",
+        // });
       } else {
         alert("Entered password do not matches");
       }
@@ -201,7 +202,7 @@ const Register = () => {
               onChange={handleOnchange}
               placeholder="Enter user email..."
               required
-              type="email"
+              type="text"
               fullWidth
               inputProps={inputStyle}
               InputLabelProps={labelStyle}

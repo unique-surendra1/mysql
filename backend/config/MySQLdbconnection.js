@@ -13,7 +13,7 @@ const dbConnection = () => {
     if (err) {
       console.error(err);
     } else {
-      console.log("Connected with mysql database....");
+      console.log("MYSQL Database connected successfully....");
     }
   });
   return connection;

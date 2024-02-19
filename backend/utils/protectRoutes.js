@@ -4,7 +4,7 @@ import bcryptjs from "bcryptjs";
 import dotenv from "dotenv";
 dotenv.config();
 
-const protectRoutes = async (res, req, next) => {
+const protectRoutes = async (req, res, next) => {
   let token;
   token = req.cookies.jwt;
   let jwtSecretKey = process.env.SECRET_KEY;
@@ -12,8 +12,7 @@ const protectRoutes = async (res, req, next) => {
   if (token) {
     try {
       const decode = jwt.verify(token, jwtSecretKey);
-
-      res.status(200).json({ message: "Authorized User ", data: decode });
+      // res.status(200).json({ message: "Authorized User ", data: decode });
       next();
     } catch (error) {
       res.status(401).json({ message: "Not Authorized and invalid token " });

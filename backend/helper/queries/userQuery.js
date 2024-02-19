@@ -28,8 +28,12 @@ const getAllusersSqlQuery = () => {
   return `SELECT * FROM  myuser;`;
 };
 
+// const getuserSqlQuery = (id) => {
+//   return `SELECT * FROM myuser  WHERE id = ${id};`;
+// };
+
 const getuserSqlQuery = (id) => {
-  return `SELECT * FROM myuser  WHERE id = ${id};`;
+  return `SELECT * FROM myuser WHERE id = '${id}';`;
 };
 
 const updateUserSqlQuery = (userName, userEmail, userPhoneNumber, id) => {

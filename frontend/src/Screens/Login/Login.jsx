@@ -12,6 +12,8 @@ import { toastSuccess, toastError } from "../../components/toast/Toasts";
 
 const Login = () => {
   const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userInfo) {
@@ -20,9 +22,6 @@ const Login = () => {
 
     window.scrollTo({ top: "0", behavior: "smooth" });
   }, []);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     password: "",
@@ -54,7 +53,8 @@ const Login = () => {
         .post(`${url}/loginuser`, data)
 
         .then((res) => {
-          console.log(res, "resonse....");
+          // console.log(res, "resonse....");
+          console.log(res.headers, "Cookies");
 
           // if (res.response.status === 404) {
           //   toast.error(res.response.data.message);

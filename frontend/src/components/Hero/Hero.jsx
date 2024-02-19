@@ -32,6 +32,7 @@ const Hero = () => {
     axios
       .get(`${url}/getusers`)
       .then((res) => {
+        console.log(res.data);
         setData(res.data.data);
       })
       .catch((err) => {

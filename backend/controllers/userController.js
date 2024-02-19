@@ -57,23 +57,25 @@ const registerUser = async (req, res) => {
 // @ Desc registering new user
 // @ Route /api/getuser/:id
 // @ Type Public & GET
-const getUser = (req, resp) => {
+const getUser = (req, res) => {
   const id = req.params.id;
+  let token;
+  token = req.cookies.jwt;
 
   try {
-    conn.query(queries.getuserSqlQuery(id), (error, res) => {
-      if (error) {
-        console.log(error, "Error...........");
-        resp.status(400).json(error);
+    conn.query(queries.getuserSqlQuery(id), (error, resp) => {
+      if (resp) {
+        let jwtSecretKey = process.env.SECRET_KEY;
+        const decode = jwt.verify(token, jwtSecretKey);
+        res.status(200).json({ message: "Authorized User ", data: decode });
+
+        // res.status(200).json({ message: "User found", data: token });
       } else {
-        // console.log(res);
-        return resp.status(200).json(res);
+        res.status(404).json({ message: "User not found", error: error });
       }
     });
   } catch (error) {
-    resp.status(400).json(error);
-
-    console.log(error);
+    res.status(400).json({ message: "quey not found", data: error });
   }
 };
 
@@ -113,6 +115,7 @@ const getAllUser = (req, resp) => {
 const loginUser = async (req, res) => {
   const { password, userEmail } = req.body;
 
+  const token = req.cookies.jwt;
   var savedPassword;
   let passsss;
 
@@ -129,9 +132,11 @@ const loginUser = async (req, res) => {
 
           if (staTus) {
             generateTken(res, userEmail);
-            res
-              .status(200)
-              .json({ message: "User login successfully", status: 200 });
+            res.status(200).json({
+              message: "User logged in successfully",
+              status: 200,
+              token: token,
+            });
           } else {
             res.status(404).json({ message: "Invalid password " });
           }

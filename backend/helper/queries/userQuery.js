@@ -36,6 +36,10 @@ const getuserSqlQuery = (id) => {
   return `SELECT * FROM myuser WHERE id = '${id}';`;
 };
 
+const getuserByEmailSqlQuery = (userEmail) => {
+  return `SELECT * FROM myuser WHERE userEmail = '${userEmail}';`;
+};
+
 const updateUserSqlQuery = (userName, userEmail, userPhoneNumber, id) => {
   return `UPDATE myuser SET userName= '${userName}', userEmail='${userEmail}',userPhoneNumber= '${userPhoneNumber}' WHERE id=${id};`;
 };
@@ -53,6 +57,7 @@ export const queries = {
   loginUser,
   fecthPassword,
   getuserSqlQuery,
+  getuserByEmailSqlQuery,
   getAllusersSqlQuery,
   updateUserSqlQuery,
   deleteUserSqlQuery,

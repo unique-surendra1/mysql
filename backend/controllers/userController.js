@@ -131,12 +131,32 @@ const loginUser = async (req, res) => {
           const staTus = await matchPassWord(password, savedPassword);
 
           if (staTus) {
-            generateTken(res, userEmail);
-            res.status(200).json({
-              message: "User logged in successfully",
-              status: 200,
-              token: token,
-            });
+            conn.query(
+              queries.getuserByEmailSqlQuery(userEmail),
+              (err, ress) => {
+                if (ress) {
+                  generateTken(res, userEmail);
+                  res.status(200).json({
+                    message: "User logged in successfully",
+                    status: 200,
+                    token: token,
+                    data: ress,
+                  });
+                } else {
+                  res
+                    .status(404)
+                    .json({ error: err, message: "Unable to fetch user data" });
+                }
+              }
+            );
+
+            // generateTken(res, userEmail);
+            // res.status(200).json({
+            //   message: "User logged in successfully",
+            //   status: 200,
+            //   token: token,
+            //   data: data,
+            // });
           } else {
             res.status(404).json({ message: "Invalid password " });
           }

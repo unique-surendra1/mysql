@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./Register.css";
 import { TextField } from "@mui/material";
 import axios from "axios";
@@ -6,9 +7,21 @@ import { ContainedButton } from "../../components/reusable/button/Button";
 import { OutlinedButton } from "../../components/reusable/button/Button";
 import { toast } from "react-toastify";
 import { toastSuccess } from "../../components/toast/Toasts";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { setCredentials } from "../../fetures/auhtSlices/authSlice";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     navigate("/profile");
+  //   }
+  // }, []);
+
   useEffect(() => {
     window.scrollTo({ top: "0", behavior: "smooth" });
   }, []);
@@ -60,7 +73,11 @@ const Register = () => {
         await axios
           .post(`${url}/registeruser`, data)
           .then((res) => {
-            toast.success("User Registered Successfully");
+            if (res.status === 200) {
+              toast.success("User Registered Successfully");
+              dispatch(setCredentials(user));
+              navigate("/profile");
+            }
             // console.log(res, "resonse....");
           })
           .catch((err) => {

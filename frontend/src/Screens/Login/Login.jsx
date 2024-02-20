@@ -17,9 +17,8 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/");
+      navigate("/profile");
     }
-
     window.scrollTo({ top: "0", behavior: "smooth" });
   }, []);
 
@@ -54,7 +53,7 @@ const Login = () => {
 
         .then((res) => {
           // console.log(res, "resonse....");
-          console.log(res.headers, "Cookies");
+          console.log(res, "login response");
 
           // if (res.response.status === 404) {
           //   toast.error(res.response.data.message);
@@ -63,7 +62,10 @@ const Login = () => {
           if (res.status === 200) {
             toast.success(res.data.message);
             if (res.data.status === 200) {
-              dispatch(setCredentials(user));
+              const data = res.data.data[0];
+              dispatch(setCredentials(data));
+              navigate("/profile");
+
               setUser({
                 password: "",
                 userEmail: "",

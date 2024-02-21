@@ -18,7 +18,15 @@ const Navbar = () => {
   return (
     <nav className=" nav z-50 fixed top-0 flex justify-between items-center w-full px-5 h-[70px] bg-blue-800 text-white ">
       <div className="logo">
-        <Link to="/">logo</Link>
+        <Link to="/">
+          <div className="h-10 w-10 rounded-full bg-contain  ">
+            <img
+              src="./logo.jpg"
+              alt="logo"
+              className="h-[100%] w-[100%] rounded-full  bg-cover bg-center "
+            />
+          </div>
+        </Link>
       </div>
       <div className="links ">
         <ul className="flex wrap gap-x-2 text-[14px]  ">

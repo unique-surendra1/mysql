@@ -21,7 +21,8 @@ const Profile = () => {
 
   useEffect(() => {
     setUserDataFromLocalStorage();
-  }, []);
+  }, [userInfo]);
+
   console.log(userData, "user data");
 
   return (

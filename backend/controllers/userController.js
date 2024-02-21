@@ -4,7 +4,7 @@ import dbConnection from "../config/MySQLdbconnection.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import dotenv from "dotenv";
-import generateTken from "../utils/generateJwtToken.js";
+import generateToken from "../utils/generateJwtToken.js";
 import matchPassWord from "../utils/matchPassword.js";
 dotenv.config();
 
@@ -44,7 +44,7 @@ const registerUser = async (req, res) => {
           console.log(error, "Error...........");
           res.status(400).json(error.sqlMessage);
         } else {
-          generateTken(res, userEmail);
+          generateToken(res, userEmail);
           res.status(200).json(resp);
         }
       }
@@ -135,7 +135,7 @@ const loginUser = async (req, res) => {
               queries.getuserByEmailSqlQuery(userEmail),
               (err, ress) => {
                 if (ress) {
-                  generateTken(res, userEmail);
+                  generateToken(res, userEmail);
                   res.status(200).json({
                     message: "User logged in successfully",
                     status: 200,
@@ -150,7 +150,7 @@ const loginUser = async (req, res) => {
               }
             );
 
-            // generateTken(res, userEmail);
+            // generateToken(res, userEmail);
             // res.status(200).json({
             //   message: "User logged in successfully",
             //   status: 200,

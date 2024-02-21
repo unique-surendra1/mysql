@@ -4,7 +4,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 dotenv.config();
 const app = express();
-
 import connectDB from "./config/dbConnection.js";
 import dbConnection from "./config/MySQLdbconnection.js";
 

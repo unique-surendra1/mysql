@@ -4,6 +4,7 @@ import Users from "./Users/Users";
 import { Typography } from "@mui/material";
 import "./Hero.css";
 import Products from "./Products/Products";
+import Slide from "../Slide/Slide";
 // import GenerateInvoice from "../DownLoad/GenerateInvoice";
 
 const Hero = () => {
@@ -52,6 +53,9 @@ const Hero = () => {
       ) : null}
 
       <article>
+        <section>
+          <Slide />
+        </section>
         <section className="  w-full min-h-screen  bg-blue-200 pt-40 mt-20 text-8xl text-center  ">
           Top
         </section>

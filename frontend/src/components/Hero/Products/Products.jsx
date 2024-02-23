@@ -6,11 +6,41 @@ const Products = () => {
     <>
       <div className=" products min-h-screen w-full ">
         <ul>
-          <li>Product</li>
-          <li>Product</li>
-          <li>Product</li>
-          <li>Product</li>
-          <li>Product</li>
+          <li className="relative card-d text-5xl text-white cursor-pointer">
+            <div className=" card-inside absolute flex justify-center items-center  content-center ">
+              {" "}
+              We are cards
+            </div>{" "}
+            Product
+          </li>
+          <li className="relative card-d text-5xl text-white cursor-pointer">
+            <div className=" card-inside absolute flex justify-center items-center  content-center ">
+              {" "}
+              We are cards
+            </div>{" "}
+            Product
+          </li>
+          <li className="relative card-d text-5xl text-white cursor-pointer">
+            <div className=" card-inside absolute flex justify-center items-center  content-center ">
+              {" "}
+              We are cards
+            </div>{" "}
+            Product
+          </li>
+          <li className="relative card-d text-5xl text-white cursor-pointer">
+            <div className=" card-inside absolute flex justify-center items-center  content-center ">
+              {" "}
+              We are cards
+            </div>{" "}
+            Product
+          </li>
+          <li className="relative card-d text-5xl text-white cursor-pointer">
+            <div className=" card-inside absolute flex justify-center items-center  content-center ">
+              {" "}
+              We are cards
+            </div>{" "}
+            Product
+          </li>
         </ul>
       </div>
     </>

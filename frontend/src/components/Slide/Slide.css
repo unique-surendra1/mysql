@@ -1,0 +1,19 @@
+.ani {
+  animation: slide 2s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    background-color: #f01707;
+    transform: translateY(0px);
+  }
+
+  50% {
+    background-color: #1002cf;
+    transform: translateY(20px);
+  }
+  100% {
+    background-color: #9ff34d;
+    transform: translateY(0px);
+  }
+}

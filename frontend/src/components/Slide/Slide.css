@@ -1,5 +1,5 @@
 .ani {
-  animation: slide 2s linear infinite;
+  animation: slide 5s linear infinite;
 }
 
 @keyframes slide {

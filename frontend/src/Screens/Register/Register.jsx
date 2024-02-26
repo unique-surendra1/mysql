@@ -6,7 +6,7 @@ import axios from "axios";
 import { ContainedButton } from "../../components/reusable/button/Button";
 import { OutlinedButton } from "../../components/reusable/button/Button";
 import { toast } from "react-toastify";
-import { toastSuccess } from "../../components/toast/Toasts";
+import { toastError, toastSuccess } from "../../components/toast/Toasts";
 import { Link, useNavigate } from "react-router-dom";
 import { setCredentials } from "../../fetures/auhtSlices/authSlice";
 
@@ -81,8 +81,13 @@ const Register = () => {
             // console.log(res, "resonse....");
           })
           .catch((err) => {
-            toast.error(err.response.data.sqlMessage);
-            toast.error(err.response.data);
+            let text = err.response.data;
+
+            if (text.includes("Duplicate")) {
+              toast.error(err.response.data.sqlMessage);
+              // toast.error(err.response.data);
+              toast.error("This email is already registered", toastError);
+            }
             console.log(err, "Error....");
           });
 

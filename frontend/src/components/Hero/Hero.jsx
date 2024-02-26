@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import "./Hero.css";
 import Products from "./Products/Products";
 import Slide from "../Slide/Slide";
+import ImageAndText from "../imageAndText/ImageAndText";
 // import GenerateInvoice from "../DownLoad/GenerateInvoice";
 
 const Hero = () => {
@@ -17,7 +18,7 @@ const Hero = () => {
 
   useEffect(() => {
     const handleVisivilty = () => {
-      window.scrollY > 100 ? setViewButon(true) : setViewButon(false);
+      window.scrollY > 900 ? setViewButon(true) : setViewButon(false);
     };
 
     window.addEventListener("scroll", handleVisivilty);
@@ -86,6 +87,14 @@ const Hero = () => {
           Our Featured Products
         </h1>
         <Products />
+      </section>
+
+      {/* Image and text slide */}
+      <section className="">
+        <h1 className=" mt-48 mb-20 text-gray-600  text-3xl md:text-4xl lg:text-5xl text-center justify-center font-semibolds ">
+          Our Products
+        </h1>
+        <ImageAndText />
       </section>
     </main>
   );

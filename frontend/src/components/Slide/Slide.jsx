@@ -12,11 +12,11 @@ const Slide = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   let slides = [
-    { name: "surendra", img: img1 },
-    { name: "Sanu", img: img2 },
-    { name: "Arun", img: img3 },
-    { name: "Govind", img: img4 },
-    { name: "Vikrant", img: img5 },
+    { name: "Stay out of banks...", img: img1 },
+    { name: "Banking is necessary, Banks are not...", img: img2 },
+    { name: "Fast banking...", img: img3 },
+    { name: "Seamless Payment Solutions ", img: img4 },
+    { name: "Secure Payments", img: img5 },
   ];
 
   useEffect(() => {
@@ -44,11 +44,11 @@ const Slide = () => {
               {item.name}
             </h1>
             <hr className="pt-10" />
-            <div className="  bg-center bg-cover  h-[50dvh] sm:h-[60dvh] md:h-[80dvh]  w-full ">
+            <div className=" relative  bg-center bg-cover  h-[50dvh] sm:h-[60dvh] md:h-[80dvh]  w-full ">
               <img
                 src={item.img}
                 alt={item.name}
-                className=" bg-center bg-cover h-[100%] w-[100%] "
+                className="  rounded-2xl m-auto bg-center bg-cover h-[100%] w-[80%]  "
               />
             </div>
           </div>

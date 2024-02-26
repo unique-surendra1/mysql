@@ -45,6 +45,7 @@ const registerUser = async (req, res) => {
           res.status(400).json(error.sqlMessage);
         } else {
           generateToken(res, userEmail);
+
           res.status(200).json(resp);
         }
       }

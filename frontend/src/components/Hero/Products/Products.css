@@ -15,7 +15,7 @@
   text-align: center;
 }
 .products ul li {
-  min-width: 400px;
+  /* min-width: 400px; */
   min-height: 500px;
   background: linear-gradient(
     rgba(135, 40, 243, 0.959),
@@ -54,4 +54,16 @@
   height: 100%;
   bottom: 0;
   display: block;
+}
+
+@media screen and (min-width: 426px) {
+  .products ul li {
+    min-width: 400px;
+  }
+}
+
+@media screen and (max-width: "321px") {
+  .products ul li {
+    width: 300px;
+  }
 }

@@ -1,0 +1,8 @@
+.imgslide {
+  box-shadow: 0px 0px 5px 1px #000;
+}
+.imgslide:hover {
+  transform: translateY(20px);
+  transition: 0.5s all linear;
+  box-shadow: 0px 0px 5px 10px #2d2d2d;
+}

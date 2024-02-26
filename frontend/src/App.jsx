@@ -10,7 +10,7 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <section className="mt-[70px] min-h-[100vh] w-full ">
+      <section className="mt-[70px] min-h-[100vh] w-full bg-white ">
         <Outlet />
         <ToastContainer />
       </section>

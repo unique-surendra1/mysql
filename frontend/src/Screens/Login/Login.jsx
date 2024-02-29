@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { toastSuccess, toastError } from "../../components/toast/Toasts";
 import Spinner from "../../components/Spinner/Spinner";
 import Login2 from "./Login2";
+import CutomNav1 from "../../components/Navbar/CustomNav/CutomNav1";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -123,6 +124,7 @@ const Login = () => {
   };
   return (
     <>
+      {/* <CutomNav1 /> */}
       {/* <Login2 /> */}
       <div>{loading ? <Spinner /> : null}</div>
       <div className="login  min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">

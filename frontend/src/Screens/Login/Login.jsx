@@ -9,8 +9,11 @@ import { setCredentials } from "../../fetures/auhtSlices/authSlice";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { toastSuccess, toastError } from "../../components/toast/Toasts";
+import Spinner from "../../components/Spinner/Spinner";
+import Login2 from "./Login2";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -48,6 +51,7 @@ const Login = () => {
       // user sended data
       // console.log(data, "data........");
 
+      setLoading(true);
       await axios
         .post(`${url}/loginuser`, data)
 
@@ -58,6 +62,7 @@ const Login = () => {
           // if (res.response.status === 404) {
           //   toast.error(res.response.data.message);
           // }
+          setLoading(false);
 
           if (res.status === 200) {
             toast.success(res.data.message);
@@ -74,8 +79,10 @@ const Login = () => {
           }
         })
         .catch((err) => {
+          setLoading(false);
+
           if (err.code === "ERR_NETWORK") {
-            toast.error("Please check your network connection!", toastError);
+            toast.error("Server error please try after some time!", toastError);
           }
 
           console.log(err, "Error....");
@@ -115,60 +122,64 @@ const Login = () => {
     },
   };
   return (
-    <div className="login  min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">
-      <form className="innerForm   flex flex-col gap-y-3 bg-white p-20 pb-[100px] relative border min-w-[500px] border-gray-300 rounded-2xl  m-1">
-        <div className="mb-3">
-          <TextField
-            id="userEmail"
-            label="User email"
-            variant="outlined"
-            lang="english"
-            name="userEmail"
-            value={user.userEmail}
-            onChange={handleOnchange}
-            placeholder="Enter user email..."
-            required
-            type="email"
-            fullWidth
-            inputProps={inputStyle}
-            InputLabelProps={labelStyle}
-          />
-        </div>
+    <>
+      {/* <Login2 /> */}
+      <div>{loading ? <Spinner /> : null}</div>
+      <div className="login  min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">
+        <form className="innerForm flex flex-col gap-y-3 bg-white px-2 py-20 md:p-20 pb-[100px] relative border w-full md:max-w-[500px] border-gray-300 rounded-2xl  m-1">
+          <div className="mb-3  w-full ">
+            <TextField
+              id="userEmail"
+              label="User email"
+              variant="outlined"
+              lang="english"
+              name="userEmail"
+              value={user.userEmail}
+              onChange={handleOnchange}
+              placeholder="Enter user email..."
+              required
+              type="email"
+              fullWidth
+              inputProps={inputStyle}
+              InputLabelProps={labelStyle}
+            />
+          </div>
 
-        <div className="mb-3">
-          <TextField
-            id="password"
-            label="User password"
-            variant="outlined"
-            lang="english"
-            name="password"
-            value={user.password}
-            onChange={handleOnchange}
-            placeholder="Enter user password..."
-            required
-            type="password"
-            fullWidth
-            inputProps={inputStyle}
-            InputLabelProps={labelStyle}
-          />
-        </div>
+          <div className="mb-3">
+            <TextField
+              id="password"
+              label="User password"
+              variant="outlined"
+              lang="english"
+              name="password"
+              value={user.password}
+              onChange={handleOnchange}
+              placeholder="Enter user password..."
+              required
+              type="password"
+              fullWidth
+              inputProps={inputStyle}
+              InputLabelProps={labelStyle}
+            />
+          </div>
 
-        <div className="p-2 w-full md:w-[100%] m-auto flex items-start  md:justify-between md:items-center flex-col md:flex-row  ">
-          <button
-            className="mr-2 tracking-wide	text-xl hover:shadow-md hover:shadow-blue-950  transition-all duration-300  rounded bg-blue-800  px-5 py-2  text-white font-semibold "
-            onClick={handleLogin}
-            type="submit">
-            Login
-          </button>
-          <p className="text-[14px]">
-            Do'nt have an account ?
-            <Link to="/sign-up " className="text-blue-800">
-              Sign-Up Now
-            </Link>
-          </p>
-        </div>
-      </form>
-    </div>
+          <div className="p-2 w-full md:w-[100%] m-auto flex items-start  md:justify-between md:items-center flex-col md:flex-row  ">
+            <button
+              className="mr-2 tracking-wide	text-xl hover:shadow-md hover:shadow-blue-950  transition-all duration-300  rounded bg-blue-800  px-5 py-2  text-white font-semibold "
+              onClick={handleLogin}
+              type="submit">
+              Login
+            </button>
+            <p className="text-[14px]">
+              Do'nt have an account ?
+              <Link to="/sign-up " className="text-blue-800">
+                Sign-Up Now
+              </Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

@@ -29,7 +29,7 @@ const Profile = () => {
     <div className="min-h-screen w-full rounded-xl  ">
       {userInfo ? (
         <>
-          <div className="flex max-w-[80%]  mt-40 min-h-[400px]   justify-center items-center mx-auto  rounded-2xl border-2 border-blue-200 p-5 ">
+          <div className="flex flex-col md:flex-row max-w-[80%]  mt-40 min-h-[400px]   justify-center items-center mx-auto  rounded-2xl border-2 border-blue-200 p-5 ">
             <div>
               <section className="flex flex-col   md:flex-row md:justify-between items-start gap-x-2 ">
                 <h1 className="profileText ">

@@ -1,0 +1,11 @@
+.lists {
+  background-color: black;
+}
+
+.ullistyle {
+  @apply m-auto gap-5 p-5 flex  flex-col justify-center items-center md:flex-row flex-wrap;
+}
+
+.ulli {
+  @apply text-xl hover:cursor-pointer shadow-sm hover:p-5 hover:text-white shadow-white transition-all duration-700 hover:-translate-y-10 hover:z-40   min-h-[200px] border border-gray-300 hover:bg-gradient-to-r hover:from-blue-900 hover:to-blue-500  rounded-xl w-full md:w-1/4 xl:w-1/4;
+}

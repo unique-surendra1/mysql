@@ -50,6 +50,9 @@ const Navbar = () => {
           <li>
             <Link to="/profile">Profile</Link>
           </li>
+          <li>
+            <Link to="/mui">Mui</Link>
+          </li>
         </ul>
       </div>
     </nav>

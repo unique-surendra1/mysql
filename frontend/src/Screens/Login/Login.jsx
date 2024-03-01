@@ -10,8 +10,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { toastSuccess, toastError } from "../../components/toast/Toasts";
 import Spinner from "../../components/Spinner/Spinner";
-import Login2 from "./Login2";
-import CutomNav1 from "../../components/Navbar/CustomNav/CutomNav1";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);

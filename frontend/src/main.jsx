@@ -18,7 +18,7 @@ import {
 import Hero from "./components/Hero/Hero.jsx";
 
 // importing Screens stuff
-import { Register, Login, Profile } from "./Screens/index.js";
+import { Register, Login, Profile, Mui } from "./Screens/index.js";
 import PrivateRoute from "./components/Private/PrivateRoute.jsx";
 
 const router = createBrowserRouter(
@@ -27,6 +27,7 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<Hero />} />
       <Route path="/login" element={<Login />} />
       <Route path="/sign-up" element={<Register />} />
+      <Route path="/mui" element={<Mui />} />
 
       {/* private routes */}
       <Route path="" element={<PrivateRoute />}>

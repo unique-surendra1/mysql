@@ -13,7 +13,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function CutomNav1() {
+export default function CustomNav() {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

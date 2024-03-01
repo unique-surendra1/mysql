@@ -6,8 +6,6 @@ import "./Hero.css";
 import Products from "./Products/Products";
 import Slide from "../Slide/Slide";
 import ImageAndText from "../imageAndText/ImageAndText";
-// import CustomNav from "../Navbar/CustomNav/CustomNav.jsx";
-// import GenerateInvoice from "../DownLoad/GenerateInvoice";
 
 const Hero = () => {
   const [data, setData] = useState([]);
@@ -47,7 +45,6 @@ const Hero = () => {
 
   return (
     <main className="h-[100%] w-[95%] m-auto mt-[70px]   ">
-      {/* <CustomNav /> */}
       {viewButton ? (
         <div className="text-4xl text-center  h-12 w-12 flex justify-center items-center  border-red-600 border-2  rounded-full p-5  z-50 fixed bottom-0 right-0 transparent text-white">
           <button onClick={handleScrollToTop} className=" absolute -top-1 ">

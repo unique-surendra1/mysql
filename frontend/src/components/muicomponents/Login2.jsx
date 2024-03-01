@@ -1,4 +1,4 @@
-import BlurBg from "../../components/BlurBg/BlurBg";
+import BlurBg from "../BlurBg/BlurBg";
 
 export default function Login2() {
   return (

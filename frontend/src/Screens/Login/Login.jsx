@@ -12,7 +12,7 @@ import { toastSuccess, toastError } from "../../components/toast/Toasts";
 import Spinner from "../../components/Spinner/Spinner";
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();

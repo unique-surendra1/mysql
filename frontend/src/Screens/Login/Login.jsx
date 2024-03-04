@@ -5,14 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import { useLoginMutation } from "../../fetures/auhtSlices/userApiSlice";
 import { setCredentials } from "../../fetures/auhtSlices/authSlice";
-
+import Cookies from "js-cookie";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { toastSuccess, toastError } from "../../components/toast/Toasts";
 import Spinner from "../../components/Spinner/Spinner";
 
 const Login = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -52,22 +52,20 @@ const Login = () => {
 
       setLoading(true);
       await axios
-        .post(`${url}/loginuser`, data)
+        .post(`${url}/loginuser`, data, { withCredentials: true })
 
         .then((res) => {
-          // console.log(res, "resonse....");
-          console.log(res, "login response");
+          // console.log(res, "login response");
 
-          // if (res.response.status === 404) {
-          //   toast.error(res.response.data.message);
-          // }
           setLoading(false);
+          Cookies.set("myid", "hello surendra");
 
           if (res.status === 200) {
             toast.success(res.data.message);
             if (res.data.status === 200) {
               const data = res.data.data[0];
               dispatch(setCredentials(data));
+              Cookies.set("token", res.data.token);
               navigate("/profile");
 
               setUser({

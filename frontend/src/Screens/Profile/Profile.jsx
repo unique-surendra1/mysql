@@ -3,10 +3,14 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { toastSuccess } from "../../components/toast/Toasts";
+import Cookies from "js-cookie";
+
+// cheking cookies from browser to access profile
+const id = Cookies.get("token");
+alert(id);
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
-
   const { userInfo } = useSelector((state) => state.auth);
 
   if (!userInfo) {

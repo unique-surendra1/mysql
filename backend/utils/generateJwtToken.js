@@ -11,7 +11,8 @@ const generateToken = (res, email) => {
   res.cookie("jwt", token, {
     httpOnly: true,
     sameSite: "strict",
-    secure: "development",
+    secure: true,
+    path: "/",
     maxAge: 1 * 60 * 60 * 1000,
   });
 };

@@ -45,7 +45,6 @@ const registerUser = async (req, res) => {
           res.status(400).json(error.sqlMessage);
         } else {
           generateToken(res, userEmail);
-
           res.status(200).json(resp);
         }
       }
@@ -69,7 +68,6 @@ const getUser = (req, res) => {
         let jwtSecretKey = process.env.SECRET_KEY;
         const decode = jwt.verify(token, jwtSecretKey);
         res.status(200).json({ message: "Authorized User ", data: decode });
-
         // res.status(200).json({ message: "User found", data: token });
       } else {
         res.status(404).json({ message: "User not found", error: error });

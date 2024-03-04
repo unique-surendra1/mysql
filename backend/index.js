@@ -13,10 +13,21 @@ app.use(express.json());
 app.use(cookieParser());
 
 // cors for enabling to make access for frontend
-app.use(cors());
+
+const corsOptions = {
+  origin: [
+    "http://localhost:8080",
+    "http://localhost:3000",
+    "http://127.0.0.1",
+    "http://example.com",
+    // your origins here
+  ],
+  credentials: true,
+  exposedHeaders: ["set-cookie"],
+};
+app.use(cors(corsOptions));
 
 import router from "./routes/userRoutes.js";
-
 // connecting database
 // connectDB();
 // dbConnection();

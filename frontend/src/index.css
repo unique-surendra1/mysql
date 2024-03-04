@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .ulli {
+    @apply text-2xl;
+  }
+
+}
+
+
 body {
   background-color: #ffffff;
 }

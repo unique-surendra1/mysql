@@ -13,7 +13,7 @@ const generateToken = (res, email) => {
     sameSite: "strict",
     secure: true,
     path: "/",
-    maxAge: 1 * 60 * 60 * 1000,
+    maxAge: 24 * 60 * 60 * 1000,
   });
 };
 

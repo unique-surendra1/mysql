@@ -6,6 +6,7 @@ import "./Hero.css";
 import Products from "./Products/Products";
 import Slide from "../Slide/Slide";
 import ImageAndText from "../imageAndText/ImageAndText";
+import TopSection from "./TopSec/TopSection";
 
 const Hero = () => {
   const [data, setData] = useState([]);
@@ -46,8 +47,8 @@ const Hero = () => {
   return (
     <main className="h-[100%] w-[95%] m-auto mt-[70px]   ">
       {viewButton ? (
-        <div className="text-4xl text-center  h-12 w-12 flex justify-center items-center  border-red-600 border-2  rounded-full p-5  z-50 fixed bottom-0 right-0 transparent text-white">
-          <button onClick={handleScrollToTop} className=" absolute -top-1 ">
+        <div className="text-2xl text-center  h-12 w-12 flex justify-center items-center  border-red-600 border-2   p-5  z-50 fixed bottom-5 right-0 transparent text-white">
+          <button onClick={handleScrollToTop} className=" absolute top-1 ">
             🔺
           </button>
         </div>
@@ -57,8 +58,8 @@ const Hero = () => {
         <section>
           <Slide />
         </section>
-        <section className="  w-full min-h-screen  bg-blue-200 pt-40 mt-20 text-8xl text-center  ">
-          Top
+        <section className="  w-full min-h-screen  bg-blue-200  break-words ">
+          <TopSection />
         </section>
 
         <section className="  py-20 min-h-[100vh] w-full  flex justify-center ">

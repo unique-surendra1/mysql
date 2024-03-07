@@ -10,6 +10,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { toastSuccess, toastError } from "../../components/toast/Toasts";
 import Spinner from "../../components/Spinner/Spinner";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -55,17 +56,17 @@ const Login = () => {
         .post(`${url}/loginuser`, data, { withCredentials: true })
 
         .then((res) => {
-          // console.log(res, "login response");
-
           setLoading(false);
-          Cookies.set("myid", "hello surendra");
+          // Cookies.set("myid", "hello surendra");
+          console.log(res, "login response .....................");
 
           if (res.status === 200) {
             toast.success(res.data.message);
             if (res.data.status === 200) {
               const data = res.data.data[0];
               dispatch(setCredentials(data));
-              Cookies.set("token", res.data.token);
+              Cookies.set("token", res.data.token, { expires: 1 * 60 * 1000 });
+
               navigate("/profile");
 
               setUser({
@@ -123,8 +124,13 @@ const Login = () => {
       {/* <CutomNav1 /> */}
       {/* <Login2 /> */}
       <div>{loading ? <Spinner /> : null}</div>
-      <div className="login  min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">
-        <form className="innerForm flex flex-col gap-y-3 bg-white px-2 py-20 md:p-20 pb-[100px] relative border w-full md:max-w-[500px] border-gray-300 rounded-2xl  m-1">
+      <div className=" relative login  min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">
+        <motion.form
+          // initial={{ x: 400, scale: 0 }}
+          // whileInView={{ x: 0, scale: 1 }}
+          // transition={{ duration: 1, type: "spring" }}
+          // exit={{ x: -400, scale: 0 }}
+          className="  innerForm flex flex-col gap-y-3 bg-white px-2 py-20 md:p-20 pb-[100px]  border w-full md:max-w-[500px] border-gray-300 rounded-2xl  m-1">
           <div className="mb-3  w-full ">
             <TextField
               id="userEmail"
@@ -175,7 +181,7 @@ const Login = () => {
               </Link>
             </p>
           </div>
-        </form>
+        </motion.form>
       </div>
     </>
   );

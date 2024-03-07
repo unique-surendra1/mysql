@@ -9,6 +9,12 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const navItemes = [
+    { name: "Home", path: "/" },
+    { name: "Profile", path: "/profile" },
+    { name: "Mui", path: "/mui" },
+  ];
+
   const logoutUser = (e) => {
     e.preventDefault();
     dispatch(logout());
@@ -16,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" nav z-50 fixed top-0 flex justify-between items-center w-full px-5 h-[70px] bg-blue-800 text-white ">
+    <nav className=" nav z-50 fixed top-0 flex justify-between items-center w-full px-5 h-[70px] bg-gradient-to-r from-blue-800  to-black text-white ">
       <div className="logo">
         <Link to="/">
           <div className="h-10 w-10 rounded-full bg-contain  ">
@@ -29,7 +35,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="links ">
-        <ul className="flex wrap gap-x-2 text-[14px]  ">
+        <ul className="flex wrap gap-x-2 text-[14px]   ">
           <li>
             <Link to="/">Home</Link>
           </li>

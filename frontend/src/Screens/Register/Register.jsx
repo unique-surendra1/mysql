@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import { toastError, toastSuccess } from "../../components/toast/Toasts";
 import { Link, useNavigate } from "react-router-dom";
 import { setCredentials } from "../../fetures/auhtSlices/authSlice";
+import { motion } from "framer-motion";
+import RegisterForm from "./Reg";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -73,6 +75,8 @@ const Register = () => {
         await axios
           .post(`${url}/registeruser`, data)
           .then((res) => {
+            // console.log(res, "response");
+
             if (res.status === 200) {
               toast.success("User Registered Successfully");
               dispatch(setCredentials(user));
@@ -81,6 +85,13 @@ const Register = () => {
             // console.log(res, "resonse....");
           })
           .catch((err) => {
+            console.log(err, "Error....");
+            if (err.message === "Network Error") {
+              toast.error(
+                "Server error plaese try after some time!",
+                toastError
+              );
+            }
             let text = err.response.data;
 
             if (text.includes("Duplicate")) {
@@ -88,7 +99,6 @@ const Register = () => {
               // toast.error(err.response.data);
               toast.error("This email is already registered", toastError);
             }
-            console.log(err, "Error....");
           });
 
         // // clearing all input fields
@@ -135,6 +145,7 @@ const Register = () => {
       fontSize: "17px",
       outlineColor: "#ffffff",
       borderColor: "ffffff",
+      with: "100%",
     },
   };
 
@@ -148,156 +159,170 @@ const Register = () => {
     },
   };
   return (
-    <div className="regform min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">
-      <form className="innerForm flex flex-col gap-y-3 bg-white p-20 pb-[100px] relative border min-w-[500px] border-gray-300 rounded-2xl  m-1">
-        <div className="mb-3 flex flex-col gap-y-6   md:gap-x-2  md:flex-row  md:justify-between md:items-center ">
-          <TextField
-            id="firstName"
-            label="First Name"
-            variant="outlined"
-            lang="english"
-            name="firstName"
-            value={user.firstName}
-            onChange={handleOnchange}
-            placeholder="Enter user name..."
-            required
-            type="text"
-            fullWidth
-            inputProps={inputStyle}
-            InputLabelProps={labelStyle}
-          />
-          <TextField
-            id="middleName"
-            label="Middle Name"
-            variant="outlined"
-            name="middleName"
-            value={user.middleName}
-            onChange={handleOnchange}
-            placeholder="Enter user name..."
-            type="text"
-            fullWidth
-            inputProps={inputStyle}
-            InputLabelProps={labelStyle}
-          />
-          <TextField
-            id="lastName"
-            label="Last Name"
-            variant="outlined"
-            lang="english"
-            name="lastName"
-            value={user.lastName}
-            onChange={handleOnchange}
-            placeholder="Enter user name..."
-            type="text"
-            fullWidth
-            inputProps={inputStyle}
-            InputLabelProps={labelStyle}
-          />
-        </div>
-        <div className="mb-3 flex flex-col gap-y-6   md:gap-x-2  md:flex-row  md:justify-between md:items-center ">
-          <div className="mb-3">
+    <>
+      <div className="relative regform min-h-screen w-full  flex justify-center items-start pt-10 bg-gray-100 p-10 m-auto">
+        <motion.form
+          // initial={{ x: -400, scale: 0 }}
+          // whileInView={{ x: 0, scale: 1 }}
+          // transition={{ duration: 1, type: "spring" }}
+          // exit={{ x: -400, scale: 0 }}
+          //   above code is not valid for moble view because of -400px
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, type: "spring" }}
+          exit={{ opacity: 0, scale: 0 }}
+          className=" innerForm flex flex-col gap-y-3 bg-white  p-5 md:p-20 pb-[100px]  border w-full   md:max-w-[900px] border-gray-300 rounded-2xl  m-1">
+          <div className="mb-3 flex flex-col gap-y-6   md:gap-x-2  md:flex-row  md:justify-between md:items-center ">
             <TextField
-              id="userName"
-              label="User Name"
+              id="firstName"
+              label="First Name"
               variant="outlined"
               lang="english"
-              name="userName"
-              value={user.userName}
+              name="firstName"
+              value={user.firstName}
               onChange={handleOnchange}
-              placeholder="Enter user email..."
-              required
-              type="email"
-              fullWidth
-              inputProps={inputStyle}
-              InputLabelProps={labelStyle}
-            />
-          </div>
-
-          <div className="mb-3">
-            <TextField
-              id="userEmail"
-              label="User email"
-              variant="outlined"
-              lang="english"
-              name="userEmail"
-              value={user.userEmail}
-              onChange={handleOnchange}
-              placeholder="Enter user email..."
+              placeholder="Enter user name..."
               required
               type="text"
               fullWidth
               inputProps={inputStyle}
               InputLabelProps={labelStyle}
             />
-          </div>
-          <div className="mb-3">
             <TextField
-              id="userPhoneNumber"
-              label="PhoneNumber"
+              id="middleName"
+              label="Middle Name"
               variant="outlined"
-              name="userPhoneNumber"
-              value={user.userPhoneNumber}
+              name="middleName"
+              value={user.middleName}
               onChange={handleOnchange}
               placeholder="Enter user name..."
-              required
-              type="number"
+              type="text"
+              fullWidth
+              inputProps={inputStyle}
+              InputLabelProps={labelStyle}
+            />
+            <TextField
+              id="lastName"
+              label="Last Name"
+              variant="outlined"
+              lang="english"
+              name="lastName"
+              value={user.lastName}
+              onChange={handleOnchange}
+              placeholder="Enter user name..."
+              type="text"
               fullWidth
               inputProps={inputStyle}
               InputLabelProps={labelStyle}
             />
           </div>
-        </div>
+          <div className="mb-3 flex flex-col gap-y-6   md:gap-x-2  md:flex-row  md:justify-between md:items-center ">
+            <div className="mb-3">
+              <TextField
+                id="userName"
+                label="User Name"
+                variant="outlined"
+                lang="english"
+                name="userName"
+                value={user.userName}
+                onChange={handleOnchange}
+                placeholder="Enter user email..."
+                required
+                type="email"
+                fullWidth
+                inputProps={inputStyle}
+                InputLabelProps={labelStyle}
+              />
+            </div>
 
-        <div className="mb-3 flex flex-col gap-y-6   md:gap-x-2  md:flex-row  md:justify-center md:items-center ">
-          <div className="mb-3 w-full ">
-            <TextField
-              id="password"
-              label="Password"
-              variant="outlined"
-              name="password"
-              value={user.password}
-              onChange={handleOnchange}
-              placeholder="Enter user password..."
-              required
-              type="password"
-              fullWidth
-              inputProps={inputStyle}
-              InputLabelProps={labelStyle}
-            />
+            <div className="mb-3">
+              <TextField
+                id="userEmail"
+                label="User email"
+                variant="outlined"
+                lang="english"
+                name="userEmail"
+                value={user.userEmail}
+                onChange={handleOnchange}
+                placeholder="Enter user email..."
+                required
+                type="text"
+                fullWidth
+                inputProps={inputStyle}
+                InputLabelProps={labelStyle}
+              />
+            </div>
+            <div className="mb-3">
+              <TextField
+                id="userPhoneNumber"
+                label="PhoneNumber"
+                variant="outlined"
+                name="userPhoneNumber"
+                value={user.userPhoneNumber}
+                onChange={handleOnchange}
+                placeholder="Enter user name..."
+                required
+                type="number"
+                fullWidth
+                inputProps={inputStyle}
+                InputLabelProps={labelStyle}
+              />
+            </div>
           </div>
-          <div className="mb-3 w-full">
-            <TextField
-              id="confirmPassword"
-              label="Confirm Password"
-              variant="outlined"
-              name="confirmPassword"
-              value={user.confirmPassword}
-              onChange={handleOnchange}
-              placeholder="Enter user confirmPassword..."
-              require
-              type="password"
-              fullWidth
-              inputProps={inputStyle}
-              InputLabelProps={labelStyle}
-            />
+
+          <div className="mb-3 flex flex-col gap-y-6   md:gap-x-2  md:flex-row  md:justify-center md:items-center ">
+            <div className="mb-3 w-full ">
+              <TextField
+                id="password"
+                label="Password"
+                variant="outlined"
+                name="password"
+                value={user.password}
+                onChange={handleOnchange}
+                placeholder="Enter user password..."
+                required
+                type="password"
+                fullWidth
+                inputProps={inputStyle}
+                InputLabelProps={labelStyle}
+              />
+            </div>
+            <div className="mb-3 w-full">
+              <TextField
+                id="confirmPassword"
+                label="Confirm Password"
+                variant="outlined"
+                name="confirmPassword"
+                value={user.confirmPassword}
+                onChange={handleOnchange}
+                placeholder="Enter user confirmPassword..."
+                require
+                type="password"
+                fullWidth
+                inputProps={inputStyle}
+                InputLabelProps={labelStyle}
+              />
+            </div>
           </div>
-        </div>
-        <div className="p-2 w-full md:w-[70%] m-auto flex items-start  md:justify-between md:items-center flex-col md:flex-row  ">
-          <button
-            className=" tracking-wide	text-xl hover:shadow-md hover:shadow-blue-950  transition-all duration-300  rounded bg-blue-800  px-5 py-2  text-white font-semibold "
-            onClick={handleRegiter}
-            type="submit">
-            SignUp
-          </button>
-          <p className="text-[14px]">
-            Already have an account ?
-            <Link to="/login " className="text-blue-800">
-              Login here
-            </Link>
-          </p>
-        </div>
-      </form>
-    </div>
+          <div className="p-2 w-full md:w-[70%] m-auto flex items-start  md:justify-between md:items-center flex-col md:flex-row  ">
+            <button
+              className=" tracking-wide	text-xl hover:shadow-md hover:shadow-blue-950  transition-all duration-300  rounded bg-blue-800  px-5 py-2  text-white font-semibold "
+              onClick={handleRegiter}
+              type="submit">
+              SignUp
+            </button>
+            <p className="text-[14px]">
+              Already have an account ?
+              <Link to="/login " className="text-blue-800">
+                Login here
+              </Link>
+            </p>
+          </div>
+        </motion.form>
+      </div>
+
+      <RegisterForm />
+    </>
   );
 };
 

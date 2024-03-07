@@ -138,8 +138,8 @@ const loginUser = async (req, res) => {
                   res.status(200).json({
                     message: "User logged in successfully",
                     status: 200,
-                    token: token,
                     data: ress,
+                    token,
                   });
                 } else {
                   res

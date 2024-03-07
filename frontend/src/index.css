@@ -2,13 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lucida Sans", "poppins";
+  font-weight: 100;
+}
+
 @layer base {
   .ulli {
     @apply text-2xl;
   }
-
 }
-
 
 body {
   background-color: #ffffff;

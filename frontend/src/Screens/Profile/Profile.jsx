@@ -6,8 +6,9 @@ import { toastSuccess } from "../../components/toast/Toasts";
 import Cookies from "js-cookie";
 
 // cheking cookies from browser to access profile
-const id = Cookies.get("token");
-alert(id);
+const id = Cookies.get();
+
+console.log(id);
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
@@ -35,7 +36,7 @@ const Profile = () => {
         <>
           <div className="flex flex-col md:flex-row max-w-[80%]  mt-40 min-h-[400px]   justify-center items-center mx-auto  rounded-2xl border-2 border-blue-200 p-5 ">
             <div>
-              <section className="flex flex-col   md:flex-row md:justify-between items-start gap-x-2 ">
+              <section className="flex flex-col   lg:flex-row lg:justify-between items-start gap-x-2 ">
                 <h1 className="profileText ">
                   First Name : {userData.firstName}
                 </h1>

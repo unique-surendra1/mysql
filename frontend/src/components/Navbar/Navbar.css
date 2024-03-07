@@ -4,6 +4,9 @@
 .links ul li {
   position: relative;
   margin: auto;
+  font-family: sans-serif "Poppins";
+  font-size: 14px;
+  font-weight: 100px;
 }
 .links ul li::after {
   content: " ";

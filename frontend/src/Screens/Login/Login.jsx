@@ -130,6 +130,10 @@ const Login = () => {
           // whileInView={{ x: 0, scale: 1 }}
           // transition={{ duration: 1, type: "spring" }}
           // exit={{ x: -400, scale: 0 }}
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, type: "spring" }}
+          exit={{ opacity: 0, scale: 0 }}
           className="  innerForm flex flex-col gap-y-3 bg-white px-2 py-20 md:p-20 pb-[100px]  border w-full md:max-w-[500px] border-gray-300 rounded-2xl  m-1">
           <div className="mb-3  w-full ">
             <TextField

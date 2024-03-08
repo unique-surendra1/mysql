@@ -50,7 +50,6 @@ const Products = () => {
             exit={{ scale: 0 }}
             className="relative card-d text-5xl text-white cursor-pointer">
             <div className=" card-inside absolute flex justify-center items-center  content-center ">
-              {" "}
               We are cards
             </div>{" "}
             Product

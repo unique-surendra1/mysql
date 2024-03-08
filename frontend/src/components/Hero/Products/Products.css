@@ -39,13 +39,15 @@
     rgba(17, 71, 248, 0.8),
     rgba(243, 40, 192, 0.959)
   );
+  /* background: #1147f8; */
+
   height: 0%;
-  border: 2px solid #000;
+  /* border: 2px solid #000; */
   font-size: 23px;
   color: #fff;
   width: 100%;
   top: 0;
-  transition: 1s all;
+  transition: 0.5s all;
 
   /* display: none; */
 }

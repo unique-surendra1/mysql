@@ -321,7 +321,9 @@ const Register = () => {
         </motion.form>
       </div>
 
-      <RegisterForm />
+      <section className="regform bg-[#f1f5f9] py-32">
+        <RegisterForm />
+      </section>
     </>
   );
 };

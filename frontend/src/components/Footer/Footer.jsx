@@ -2,7 +2,14 @@ import React from "react";
 import "./Footer.css";
 import { Link } from "react-router-dom";
 
-import { facebookIcon, instagramIcon, twitterIcon } from "../../assets/Icons";
+import {
+  facebookIcon,
+  instagramIcon,
+  twitterIcon,
+  gitHubIcon,
+  linkedInIcon,
+  youTubeIcon,
+} from "../../assets/Icons";
 
 const Footer = () => {
   return (
@@ -63,10 +70,25 @@ const Footer = () => {
           </ul>
         </div>
         <div className=" ulli">
-          <ul className="flex justify-around items-center">
-            <li>{facebookIcon}</li>
-            <li>{twitterIcon}</li>
-            <li>{instagramIcon}</li>
+          <ul className="flex flex-wrap justify-around items-center gap-6">
+            <li className="h-16 w-16 shadow-gray-700 shadow-md ">
+              {gitHubIcon}
+            </li>
+            <li className="h-16 w-16 shadow-gray-700 shadow-md ">
+              {linkedInIcon}
+            </li>
+            <li className="h-16 w-16 shadow-gray-700 shadow-md ">
+              {twitterIcon}
+            </li>
+            <li className="h-16 w-16 shadow-gray-700 shadow-md ">
+              {facebookIcon}
+            </li>
+            <li className="h-16 w-16 shadow-gray-700 shadow-md ">
+              {instagramIcon}
+            </li>
+            <li className="h-16 w-16 shadow-gray-700 shadow-md ">
+              {youTubeIcon}
+            </li>
           </ul>
         </div>
         <div className=" ulli">
